@@ -1,8 +1,8 @@
-import { Logo } from "@/components/UI/Logo";
+import { Logo } from '@/components/UI/Logo'
 
 type AuthLayoutProps = {
-  children: React.ReactElement;
-};
+  children: React.ReactElement
+}
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           <Logo />
 
           <h2 className="mt-10 text-gray-50 text-[2rem] font-bold leading-[120%] max-w-[410px]">
-            Tudo o que você precisa para começar a vender em um só local{" "}
+            Tudo o que você precisa para começar a vender em um só local{' '}
           </h2>
           <p className="text-gray-50 mt-3">
             Dorem ipsum dolor sit amet, consectetur adipiscing elit.libero et
@@ -25,5 +25,5 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         {children}
       </section>
     </main>
-  );
+  )
 }
