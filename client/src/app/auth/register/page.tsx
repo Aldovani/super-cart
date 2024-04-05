@@ -7,6 +7,7 @@ import Google from '@/components/Logos/Google'
 import { Button } from '@/components/UI/Button'
 import { Input } from '@/components/UI/Input'
 import { Logo } from '@/components/UI/Logo'
+import { Password } from '@/components/UI/Password'
 
 import { useRegister } from './useRegister'
 
@@ -15,6 +16,7 @@ export default function RegisterPage() {
     errors,
     register,
     handleSubmit,
+    watch,
     handleChangeCPF,
     handleChangeCellphone,
   } = useRegister()
@@ -28,7 +30,7 @@ export default function RegisterPage() {
         </Link>
       </header>
 
-      <div className="px-8 mt-12">
+      <div className="px-8  max-sm:px-2 max-md:px-4  mt-12">
         <div className="max-w-80">
           <h1 className="text-[2rem] text-gray-600 font-medium">Cadastra-se</h1>
           <p className=" text-gray-400 ">
@@ -40,16 +42,19 @@ export default function RegisterPage() {
           onSubmit={handleSubmit((user) => {
             console.log({ ...user })
           })}
-          className="mt-10 grid grid-areas-form-sing-in gap-y-4 gap-x-6"
+          className="mt-10 grid grid-areas-form-sing-in gap-y-4 gap-x-6 max-sm:grid-areas-none max-sm:grid-cols-1 "
         >
-          <Input.Label name="Nome" className="grid-in-name">
+          <Input.Label
+            name="Nome"
+            className="grid-in-name max-sm:grid-in-unset"
+          >
             <Input.Field
               placeholder="Nome completo"
               {...register('name')}
               error={!!errors.name?.message}
             />
           </Input.Label>
-          <Input.Label name="CPF" className="grid-in-CPF">
+          <Input.Label name="CPF" className="grid-in-CPF max-sm:grid-in-unset">
             <Input.Field
               placeholder="000.000.000-00"
               maxLength={14}
@@ -59,14 +64,20 @@ export default function RegisterPage() {
               error={!!errors.cpf?.message}
             />
           </Input.Label>
-          <Input.Label name="Email" className="grid-in-email">
+          <Input.Label
+            name="Email"
+            className="grid-in-email max-sm:grid-in-unset"
+          >
             <Input.Field
               placeholder="email@exemple.com"
               {...register('email')}
               error={!!errors.email?.message}
             />
           </Input.Label>
-          <Input.Label name="Telefone" className="grid-in-phone">
+          <Input.Label
+            name="Telefone"
+            className="grid-in-phone max-sm:grid-in-unset"
+          >
             <Input.Field
               maxLength={15}
               placeholder="(99) 99999-9999"
@@ -76,14 +87,20 @@ export default function RegisterPage() {
               error={!!errors.cellphone?.message}
             />
           </Input.Label>
-          <Input.Label name="Senha" className="grid-in-password">
-            <Input.Field
+          <Input.Label
+            name="Senha"
+            className="grid-in-password max-sm:grid-in-unset"
+          >
+            <Password
               placeholder="••••••••••••••••"
               {...register('password')}
               error={!!errors.password?.message}
+              value={watch('password')}
             />
           </Input.Label>
-          <Button className="grid-in-button">Cadastra-se</Button>
+          <Button className="grid-in-button max-sm:grid-in-unset">
+            Cadastra-se
+          </Button>
         </form>
 
         <div className="flex items-center gap-4 my-6">
