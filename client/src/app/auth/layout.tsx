@@ -5,7 +5,9 @@ type AuthLayoutProps = {
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <main className="grid grid-cols-[1fr_45%] h-full max-lg:grid-cols-1">
-      <section className="w-4/5 max-w-3xl mx-auto">{children}</section>
+      <section className="w-4/5 max-sm:max-w-full max-sm:w-full max-sm:px-8 max-w-3xl mx-auto">
+        {children}
+      </section>
 
       <div className="bg-auth-layout flex bg-cover pl-20 pb-16 max-lg:hidden">
         <div className="flex flex-col justify-end gap-2 max-w-lg">
