@@ -1,5 +1,4 @@
 export const maskCPF = (CPF: string) => {
-  console.log(CPF)
   CPF = CPF.replace(/\D/g, '')
 
   if (CPF.length <= 11) {
