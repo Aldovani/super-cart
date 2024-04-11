@@ -1,9 +1,16 @@
+'use client'
+
 import Link from 'next/link'
 
 import { Button } from '@/components/UI/Button'
 import { Input } from '@/components/UI/Input'
 
-export default function SigninPage() {
+import { useSignIn } from './useSignin'
+
+export default function SignInPage() {
+  const { errors, handleChangeFormatCNPJInput, handleSubmit, register } =
+    useSignIn()
+
   return (
     <>
       <header className="mt-6 flex justify-between"></header>
@@ -18,12 +25,27 @@ export default function SigninPage() {
             <span className="text-emerald-600 font-bold"> Super Cart</span>
           </p>
         </div>
-        <form className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6">
+        <form
+          onSubmit={handleSubmit(() => {})}
+          className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6"
+        >
           <Input.Label name="CNPJ">
-            <Input.Field placeholder="000.000.000-00" />
+            <Input.Field
+              placeholder="000.000.000-00"
+              maxLength={14}
+              {...register('cnpj', {
+                onChange: (el) => handleChangeFormatCNPJInput(el.target.value),
+              })}
+              error={!!errors.cnpj?.message}
+            />
           </Input.Label>
           <Input.Label name="Senha">
-            <Input.Field placeholder="••••••••••••••••" type="password" />
+            <Input.Field
+              placeholder="••••••••••••••••"
+              type="password"
+              {...register('password')}
+              error={!!errors.password?.message}
+            />
           </Input.Label>
           <span className="font-medium text-gray-400">
             esqueceu a senha ?
