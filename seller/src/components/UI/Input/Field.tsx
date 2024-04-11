@@ -18,6 +18,7 @@ type FieldProps = ComponentProps<'input'> &
   VariantProps<typeof field> & {
     children?: React.ReactElement
   }
+
 export const Field = forwardRef(function (
   { error, sizes = 'medium', className, children, ...props }: FieldProps,
   ref: Ref<HTMLInputElement> | null,
