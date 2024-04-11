@@ -1,9 +1,15 @@
+'use client'
+
 import Link from 'next/link'
 
 import { Button } from '@/components/UI/Button'
 import { Input } from '@/components/UI/Input'
 
+import { useRegister } from './useRegister'
+
 export default function RegisterPage() {
+  const { errors, register, handleSubmit, handleChangeFormatCNPJInput } =
+    useRegister()
   return (
     <>
       <header className="mt-6 flex justify-between"></header>
@@ -17,15 +23,35 @@ export default function RegisterPage() {
             Gerencie sua loja de forma fácil e rápida
           </p>
         </div>
-        <form className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6">
+        <form
+          onSubmit={handleSubmit(() => {})}
+          className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6"
+        >
           <Input.Label name="CNPJ">
-            <Input.Field placeholder="000.000.000-00" />
+            <Input.Field
+              placeholder="000.000.000-00"
+              maxLength={14}
+              {...register('cnpj', {
+                onChange: (el) => handleChangeFormatCNPJInput(el.target.value),
+              })}
+              error={!!errors.cnpj?.message}
+            />
           </Input.Label>
           <Input.Label name="Email">
-            <Input.Field placeholder="email@exemple.com" type="password" />
+            <Input.Field
+              placeholder="email@exemple.com"
+              type="email"
+              {...register('email')}
+              error={!!errors.email?.message}
+            />
           </Input.Label>
           <Input.Label name="Senha">
-            <Input.Field placeholder="••••••••••••••••" type="password" />
+            <Input.Field
+              placeholder="••••••••••••••••"
+              type="password"
+              {...register('password')}
+              error={!!errors.password?.message}
+            />
           </Input.Label>
           <Button>Cadastra-se</Button>
         </form>
