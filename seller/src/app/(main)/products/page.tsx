@@ -1,5 +1,6 @@
 import { Link } from '@/components/UI/Link'
 import { ProductsFilter } from '@/components/UI/ProductsFilter'
+import { ProductsTable } from '@/components/UI/ProductsTable'
 
 export default function ProductListPage() {
   return (
@@ -18,8 +19,9 @@ export default function ProductListPage() {
         </div>
       </header>
 
-      <section>
+      <section className="px-8">
         <ProductsFilter />
+        <ProductsTable />
       </section>
     </div>
   )
