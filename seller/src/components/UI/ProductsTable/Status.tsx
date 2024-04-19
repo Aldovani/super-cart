@@ -1,7 +1,7 @@
 import { tv, VariantProps } from 'tailwind-variants'
 
 const status = tv({
-  base: 'font-medium px-3 py-1',
+  base: 'font-medium px-3 py-1 rounded-lg',
   variants: {
     status: {
       unavailable: 'text-rose-500 bg-rose-50',

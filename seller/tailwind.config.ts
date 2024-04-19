@@ -18,7 +18,7 @@ const config: Config = {
           'name name',
           'value quantity',
           'category type',
-          'validate image',
+          'image image',
           'description description',
           '. button',
         ],

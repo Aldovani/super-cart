@@ -19,7 +19,7 @@ export default function ProductListPage() {
         </div>
       </header>
 
-      <section className="px-8">
+      <section className="px-8 mt-8 flex flex-col gap-4">
         <ProductsFilter />
         <ProductsTable />
       </section>

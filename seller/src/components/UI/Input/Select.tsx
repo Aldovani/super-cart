@@ -12,17 +12,16 @@ const select = tv({
 
 type SelectProps = ComponentProps<'select'> &
   VariantProps<typeof select> & {
-    children?: React.ReactElement
+    children?: React.ReactNode
   }
 
 export const Select = forwardRef(function (
-  { children, ...props }: SelectProps,
+  { children, className, error, ...props }: SelectProps,
   ref: Ref<HTMLSelectElement> | null,
 ) {
   return (
     <div className="relative w-full">
-      <select {...props} ref={ref} className={select()}>
-        <option value="">as</option>
+      <select {...props} ref={ref} className={select({ className, error })}>
         {children}
       </select>
     </div>

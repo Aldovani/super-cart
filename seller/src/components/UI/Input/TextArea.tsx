@@ -16,10 +16,16 @@ type TextAreaProps = ComponentProps<'textarea'> &
   }
 
 export const TextArea = forwardRef(function (
-  { ...props }: TextAreaProps,
+  { className, error, ...props }: TextAreaProps,
   ref: Ref<HTMLTextAreaElement> | null,
 ) {
-  return <textarea {...props} ref={ref} className={textArea()}></textarea>
+  return (
+    <textarea
+      {...props}
+      ref={ref}
+      className={textArea({ className, error })}
+    ></textarea>
+  )
 })
 
 TextArea.displayName = 'TextAreaInput'

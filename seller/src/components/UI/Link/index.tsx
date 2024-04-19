@@ -22,9 +22,9 @@ type LinkProps = {
 } & NextLinkProps &
   VariantProps<typeof link>
 
-export function Link({ className, children, ...props }: LinkProps) {
+export function Link({ className, variants, children, ...props }: LinkProps) {
   return (
-    <NextLink className={link({ className })} {...props}>
+    <NextLink className={link({ className, variants })} {...props}>
       {children}
     </NextLink>
   )

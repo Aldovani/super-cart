@@ -1,43 +1,137 @@
+'use client'
+
+import { Ellipsis } from 'lucide-react'
+
+import { DropDownMenu } from '../DropDownMenu'
+
+import { Category } from './Category'
 import { Status } from './Status'
 
 export function ProductsTable() {
   return (
-    <div className="w-full border rounded-lg">
+    <div className="">
       <table className="w-full">
-        <thead className="w-full bg-gray-50 ">
-          <tr className="bg-gray-50   w-full">
-            <th className="font-medium p-4 text-gray-500 uppercase">
+        <thead className=" bg-gray-50  rounded-lg border border-gray-200  w-full">
+          <tr className="rounded-3xl">
+            <th className="text-left rounded-lg  px-8 font-medium p-4 text-gray-500 uppercase">
               Produtos
             </th>
-            <th className="font-medium text-gray-500 uppercase">Valor</th>
-            <th className="font-medium text-gray-500 uppercase">Categorias</th>
-            <th className="font-medium text-gray-500 uppercase">Status</th>
-            <th className="font-medium text-gray-500 uppercase">
+            <th className="text-left font-medium text-gray-500 uppercase">
+              Valor
+            </th>
+            <th className="text-left  font-medium text-gray-500 uppercase">
+              Categorias
+            </th>
+            <th className="text-left  font-medium text-gray-500 uppercase">
+              Status
+            </th>
+            <th className="text-left  font-medium text-gray-500 uppercase">
               Data de criação
             </th>
-            <th className="font-medium text-gray-500 uppercase"></th>
+            <th className="text-left  font-medium text-gray-500 uppercase"></th>
           </tr>
         </thead>
         <tbody>
           <tr className=" border-b">
-            <td className="pb-6">
-              <span></span>
-              <span>Feijão nene</span>
+            <td className="pl-8 py-6">
+              <div className="flex gap-4 items-center">
+                <span className="block size-12 bg-gray-100"></span>
+                <span className="font-medium text-gray-600">Feijão nene</span>
+              </div>
             </td>
-            <td className="pb-6">
-              <span>R$20,00</span>
+            <td className="py-6">
+              <span className="font-medium text-gray-500">R$20,00</span>
             </td>
-            <td className="pb-6">
-              <span>Grãos</span>
+            <td className="py-6">
+              <Category>Grãos</Category>
             </td>
-            <td className="pb-6">
+            <td className="py-6">
               <Status status="available" />
             </td>
-            <td className="pb-6">
-              <span>12/04/2024</span>
+            <td className="py-6">
+              <span className="font-medium text-gray-600">12/04/2024</span>
             </td>
-            <td className="pb-6">
-              <span>...</span>
+            <td className="py-6">
+              <DropDownMenu.Context>
+                <DropDownMenu.Trigger>
+                  <Ellipsis />
+                </DropDownMenu.Trigger>
+                <DropDownMenu.Body>
+                  <p>sds</p>
+                </DropDownMenu.Body>
+              </DropDownMenu.Context>
+            </td>
+          </tr>
+
+          <tr className=" border-b">
+            <td className="pl-8 py-6">
+              <div className="flex gap-4 items-center">
+                <span className="block size-12 bg-gray-100"></span>
+                <span className="font-medium text-gray-600">Feijão nene</span>
+              </div>
+            </td>
+            <td className="py-6">
+              <span className="font-medium text-gray-500">R$20,00</span>
+            </td>
+            <td className="py-6">
+              <Category>Grãos</Category>
+            </td>
+            <td className="py-6">
+              <Status status="available" />
+            </td>
+            <td className="py-6">
+              <span className="font-medium text-gray-600">12/04/2024</span>
+            </td>
+            <td className="py-6">
+              <Ellipsis />
+            </td>
+          </tr>
+
+          <tr className=" border-b">
+            <td className="pl-8 py-6">
+              <div className="flex gap-4 items-center">
+                <span className="block size-12 bg-gray-100"></span>
+                <span className="font-medium text-gray-600">Feijão nene</span>
+              </div>
+            </td>
+            <td className="py-6">
+              <span className="font-medium text-gray-500">R$20,00</span>
+            </td>
+            <td className="py-6">
+              <Category>Grãos</Category>
+            </td>
+            <td className="py-6">
+              <Status status="available" />
+            </td>
+            <td className="py-6">
+              <span className="font-medium text-gray-600">12/04/2024</span>
+            </td>
+            <td className="py-6">
+              <Ellipsis />
+            </td>
+          </tr>
+
+          <tr className=" border-b">
+            <td className="pl-8 py-6">
+              <div className="flex gap-4 items-center">
+                <span className="block size-12 bg-gray-100"></span>
+                <span className="font-medium text-gray-600">Feijão nene</span>
+              </div>
+            </td>
+            <td className="py-6">
+              <span className="font-medium text-gray-500">R$20,00</span>
+            </td>
+            <td className="py-6">
+              <Category>Grãos</Category>
+            </td>
+            <td className="py-6">
+              <Status status="available" />
+            </td>
+            <td className="py-6">
+              <span className="font-medium text-gray-600">12/04/2024</span>
+            </td>
+            <td className="py-6">
+              <Ellipsis />
             </td>
           </tr>
         </tbody>

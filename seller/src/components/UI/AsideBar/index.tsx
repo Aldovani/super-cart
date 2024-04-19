@@ -1,3 +1,4 @@
+'use client'
 import {
   Archive,
   ArrowUpDown,
@@ -12,10 +13,13 @@ import {
   ScanBarcode,
   ShoppingBasket,
 } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 import { LinkItem } from './LinkItem'
 
 export function AsideBar() {
+  const pathName = usePathname()
+
   return (
     <aside className="relative col-start-1 col-end-2 row-start-1 row-end-3 ">
       <div className="fixed  max-w-fit pt-6 border-r border-gray-200 h-full  overflow-y-auto   ">
@@ -33,7 +37,11 @@ export function AsideBar() {
             <ChevronDown className="text-gray-500" />
           </div>
 
-          <LinkItem className="mb-6 ml-6" href="/dashboard">
+          <LinkItem
+            isActive={pathName.includes('/dashboard')}
+            className="mb-6 ml-6"
+            href="/dashboard"
+          >
             <LayoutDashboard className="text-gray-400" />
             Dashboard
           </LinkItem>
@@ -42,10 +50,13 @@ export function AsideBar() {
         <nav className="border-y px-4 py-6 border-gray-200">
           <span className="text-sm text-gray-400">Estabelecimento</span>
           <div className="pl-6 flex flex-col gap-4 mt-3">
-            <LinkItem href="/products">
+            <LinkItem
+              href="/products"
+              isActive={pathName.includes('/products')}
+            >
               <ShoppingBasket className="text-gray-400" /> Produtos
             </LinkItem>
-            <LinkItem href="/products">
+            <LinkItem href="/orders" isActive={pathName.includes('/orders')}>
               <ArrowUpDown className="text-gray-400" />
               Pedidos
             </LinkItem>
@@ -82,10 +93,10 @@ export function AsideBar() {
 
         <nav className=" px-4 py-6">
           <div className="pl-6 flex flex-col gap-4 mt-3">
-            <LinkItem href="/products">
+            <LinkItem href="/profile" isActive={pathName.includes('/profile')}>
               <CircleUserRound className="text-gray-400" /> Perfil
             </LinkItem>
-            <LinkItem href="/products">
+            <LinkItem href="/config" isActive={pathName.includes('/config')}>
               <Cog className="text-gray-400" />
               Configuração
             </LinkItem>
