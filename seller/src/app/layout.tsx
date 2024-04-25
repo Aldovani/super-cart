@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { ViewTransitions } from 'next-view-transitions'
+
+import { Providers } from '@/providers'
 
 import './globals.css'
 
@@ -19,8 +22,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>{children}</body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={poppins.className}>
+          <Providers>{children}</Providers>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

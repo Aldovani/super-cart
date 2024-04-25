@@ -77,7 +77,10 @@ export function AsideBar() {
         <nav className="border-y px-4 py-6 border-gray-200">
           <span className="text-sm text-gray-400">Finanças</span>
           <div className="pl-6 flex flex-col gap-4 mt-3">
-            <LinkItem href="/products">
+            <LinkItem
+              href="/payment-methods"
+              isActive={pathName.includes('/payment-methods')}
+            >
               <CreditCard className="text-gray-400" /> Forma de pagamento
             </LinkItem>
             <LinkItem href="/products">

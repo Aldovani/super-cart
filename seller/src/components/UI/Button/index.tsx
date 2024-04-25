@@ -10,9 +10,14 @@ const button = tv({
       secondary:
         'border border-gray-200 text-gray-500 bg-white hover:bg-gray-100 transition-colors ',
     },
+    action: {
+      normal: '',
+      dangerous: 'text-rose-500',
+    },
   },
   defaultVariants: {
     variants: 'primary',
+    action: 'normal',
   },
 })
 
@@ -20,9 +25,15 @@ type ButtonProps = ComponentProps<'button'> &
   VariantProps<typeof button> & {
     children?: React.ReactNode
   }
-export function Button({ children, className, variants, ...res }: ButtonProps) {
+export function Button({
+  action,
+  children,
+  className,
+  variants,
+  ...res
+}: ButtonProps) {
   return (
-    <button {...res} className={button({ className, variants })}>
+    <button {...res} className={button({ className, variants, action })}>
       {children}
     </button>
   )
