@@ -2,14 +2,20 @@
 
 import Link from 'next/link'
 
+// import { SellerAuthenticate } from '@/api/seller/authenticate'
 import { Button } from '@/components/UI/Button'
 import { Input } from '@/components/UI/Input'
 
 import { useSignIn } from './useSignin'
 
 export default function SignInPage() {
-  const { errors, handleChangeFormatCNPJInput, handleSubmit, register } =
-    useSignIn()
+  const {
+    errors,
+    handleChangeFormatCNPJInput,
+    handleSubmit,
+    register,
+    handleSignIn,
+  } = useSignIn()
 
   return (
     <>
@@ -26,7 +32,12 @@ export default function SignInPage() {
           </p>
         </div>
         <form
-          onSubmit={handleSubmit(() => {})}
+          onSubmit={handleSubmit(({ cnpj, password }) => {
+            handleSignIn({ cnpj, password })
+            // SellerAuthenticate({ cnpj, password }).then((data) => {
+            //   console.log(data)
+            // })
+          })}
           className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6"
         >
           <Input.Label name="CNPJ">
