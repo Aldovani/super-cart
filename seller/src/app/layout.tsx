@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import { ViewTransitions } from 'next-view-transitions'
-
-import { Providers } from '@/providers'
 
 import { Providers } from '@/providers'
 
