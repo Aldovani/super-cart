@@ -1,5 +1,4 @@
-import { LinkProps } from 'next/link'
-import { Link } from 'next-view-transitions'
+import Link, { LinkProps } from 'next/link'
 import { tv, VariantProps } from 'tailwind-variants'
 
 const linkItem = tv({
