@@ -1,3 +1,6 @@
+import { ProductsFilter } from '@/components/UI/ProductsFilter'
+import { ProductsTable } from '@/components/UI/ProductsTable'
+
 export default function OrdersListPage() {
   return (
     <>
@@ -11,6 +14,11 @@ export default function OrdersListPage() {
           </div>
         </div>
       </header>
+
+      <section className="px-8 mt-8 flex flex-col gap-4">
+        <ProductsFilter />
+        <ProductsTable />
+      </section>
     </>
   )
 }
