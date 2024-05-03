@@ -8,8 +8,13 @@ import { Input } from '@/components/UI/Input'
 import { useRegister } from './useRegister'
 
 export default function RegisterPage() {
-  const { errors, register, handleSubmit, handleChangeFormatCNPJInput } =
-    useRegister()
+  const {
+    errors,
+    register,
+    handleSubmit,
+    handleChangeFormatCNPJInput,
+    onSubmit,
+  } = useRegister()
   return (
     <>
       <header className="mt-6 flex justify-between"></header>
@@ -24,7 +29,9 @@ export default function RegisterPage() {
           </p>
         </div>
         <form
-          onSubmit={handleSubmit(() => {})}
+          onSubmit={handleSubmit(({ cnpj, email, password }) => {
+            onSubmit({ cnpj, email, password })
+          })}
           className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6"
         >
           <Input.Label name="CNPJ">

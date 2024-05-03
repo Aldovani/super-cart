@@ -1,12 +1,9 @@
 import NextAuth, { AuthOptions } from 'next-auth'
 import CredentialProvider from 'next-auth/providers/credentials'
 
-import {
-  SellerAuthenticate,
-  SellerAuthenticateResponseBody,
-} from '@/api/seller/authenticate'
+import { SellerAuthenticate } from '@/api/seller/authenticate'
 
-const authOption: AuthOptions = {
+export const authOption: AuthOptions = {
   providers: [
     CredentialProvider({
       type: 'credentials',
@@ -16,42 +13,48 @@ const authOption: AuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.password || !credentials?.cnpj) return
-
-        const seller = await SellerAuthenticate({
+        if (!credentials?.password || !credentials?.cnpj) return null
+        const data = await SellerAuthenticate({
           cnpj: credentials.cnpj,
           password: credentials.password,
         })
-        if (!seller?.ok) return null
 
-        const { seller: sellerToJson } =
-          (await seller.json()) as SellerAuthenticateResponseBody
-
-        if (sellerToJson)
+        if (data)
           return {
-            id: sellerToJson.idComerciante,
-            email: sellerToJson.email,
-            image: sellerToJson.bannerUrl,
-            name: sellerToJson.razaoSocial,
+            id: data.comerciante.idComerciante.toString(),
+            accessToken: data.token.token,
+            expiresAt: data.token.expiresAt,
           }
 
         return null
       },
     }),
   ],
-  pages: {
-    signIn: '/auth/signin',
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60 * 24 * 30,
   },
   callbacks: {
-    jwt({ token, user }) {
+    async jwt({ token, user }) {
       return { ...token, ...user }
     },
-    session({ session, token }) {
-      return { ...session, ...token }
+
+    async session({ session, token }) {
+      session.user = token
+      session.expires = token.expiresAt
+      console.log({ session })
+      return session
     },
+  },
+  pages: {
+    signIn: '/auth/signin',
+    error: '/auth/signin',
+    newUser: '/auth/signin',
+    verifyRequest: '/auth/signin',
+    signOut: '/auth/signin',
   },
 }
 
-const handler = NextAuth(authOption)
+export const handler = NextAuth(authOption)
 
 export { handler as GET, handler as POST }

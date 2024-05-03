@@ -1,4 +1,4 @@
-import { fetchHttpClient } from '@/infra/providers/impls/httpClient/fetchHttpClient'
+import { DefaultSession } from 'next-auth'
 
 type SellerAuthenticatePayload = {
   cnpj: string
@@ -26,21 +26,23 @@ type Seller = {
 }
 export type SellerAuthenticateResponseBody = {
   token: token
-  comerciante: Seller
+  seller: Seller
 }
 
-export async function SellerAuthenticate({
-  cnpj,
-  password,
-}: SellerAuthenticatePayload) {
-  try {
-    const seller = await fetchHttpClient.post<SellerAuthenticateResponseBody>(
-      '/comerciantes/auth',
-      { cnpj, senha: password },
-    )
+declare module 'next-auth/jwt' {
+  interface JWT {
+    idToken?: string
+    accessToken: string
+    expiresAt: string
+  }
+}
 
-    return seller
-  } catch (err) {
-    return null
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      idToken?: string
+      tokenExpiresAte?: string
+      accessToken?: string
+    } & DefaultSession['user']
   }
 }

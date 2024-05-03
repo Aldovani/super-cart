@@ -34,9 +34,6 @@ export default function SignInPage() {
         <form
           onSubmit={handleSubmit(({ cnpj, password }) => {
             handleSignIn({ cnpj, password })
-            // SellerAuthenticate({ cnpj, password }).then((data) => {
-            //   console.log(data)
-            // })
           })}
           className="mt-10 grid grid-cols-1 gap-y-4 gap-x-6"
         >
