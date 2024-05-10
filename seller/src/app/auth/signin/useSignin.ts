@@ -1,9 +1,10 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { useForms } from '@/hooks/useForms'
 import { maskCNPJ } from '@/utils/maskCnpj'
 
 type SignInPayload = {
@@ -11,7 +12,7 @@ type SignInPayload = {
   password: string
 }
 
-const registerSchema = z.object({
+const signInSchema = z.object({
   cnpj: z
     .string()
     .min(14, 'Deve conter no mínimo 14 números')
@@ -19,44 +20,58 @@ const registerSchema = z.object({
   password: z.string().min(8, 'Deve conter no minion 8 caracteres'),
 })
 
-type registerSchema = z.infer<typeof registerSchema>
+type signInSchema = z.infer<typeof signInSchema>
 
 export function useSignIn() {
-  const navigation = useRouter()
-  const searchParams = useSearchParams()
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<registerSchema>({
-    resolver: zodResolver(registerSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    formState: { errors, isValid },
+    setError,
+  } = useForms<signInSchema>({
+    validator: signInSchema,
   })
 
-  function handleChangeFormatCNPJInput(value: string) {
-    setValue('cnpj', maskCNPJ(value))
-  }
+  const navigation = useRouter()
+  const searchParams = useSearchParams()
 
-  async function handleSignIn({ cnpj, password }: SignInPayload) {
-    await signIn('credentials', {
-      cnpj,
-      password,
-      redirect: false,
-    })
-    const callbackUrl =
-      searchParams.get('callbackUrl') || 'http://localhost:3000/app/dashboard'
+  const { mutate: handleSignIn, isPending } = useMutation({
+    mutationFn: async ({ cnpj, password }: SignInPayload) => {
+      const data = await signIn('credentials', {
+        cnpj,
+        password,
+        redirect: false,
+      })
 
-    navigation.push(callbackUrl)
-  }
+      if (data?.error) {
+        console.log(data)
+        throw new Error(data.error)
+      }
+    },
+    onSuccess: () => {
+      const callbackUrl =
+        searchParams.get('callbackUrl') || 'http://localhost:3000/app/dashboard'
+      navigation.push(callbackUrl)
+    },
+    onError: (err) => {
+      console.log(err)
+
+      if (err.message === 'CredentialsSignin') {
+        toast.error('credencias invalidas')
+
+        setError('cnpj', { message: 'credencias invalidas' })
+        setError('password', { message: 'credencias invalidas' })
+      }
+    },
+  })
 
   return {
     register,
     handleSubmit,
     errors,
-    handleChangeFormatCNPJInput,
     handleSignIn,
+    isValid,
+    isPending,
+    maskCNPJ,
   }
 }

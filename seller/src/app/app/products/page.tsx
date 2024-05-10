@@ -13,11 +13,7 @@ export default function ProductListPage() {
               Confira todos os produtos registrado no seu marktplace
             </p>
           </div>
-          <Link
-            className="w-fit px-8 "
-            href="/dashboard/products/create"
-            passHref
-          >
+          <Link className="w-fit px-8 " href="/app/products/create" passHref>
             Adicionar produto
           </Link>
         </div>

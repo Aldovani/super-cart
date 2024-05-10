@@ -4,17 +4,23 @@ import Link from 'next/link'
 
 import { Button } from '@/components/UI/Button'
 import { Input } from '@/components/UI/Input'
+import { fetchHttpClient } from '@/infra/providers/impls/httpClient/fetchHttpClient'
+import { SellerMainGateway } from '@/services'
 
 import { useRegister } from './useRegister'
-
 export default function RegisterPage() {
+  const sellerMainGateway = new SellerMainGateway(fetchHttpClient)
   const {
     errors,
     register,
     handleSubmit,
-    handleChangeFormatCNPJInput,
     onSubmit,
-  } = useRegister()
+    maskCNPJ,
+    isPending,
+    isValid,
+  } = useRegister({
+    sellerGateway: sellerMainGateway,
+  })
   return (
     <>
       <header className="mt-6 flex justify-between"></header>
@@ -39,10 +45,11 @@ export default function RegisterPage() {
               placeholder="000.000.000-00"
               maxLength={14}
               {...register('cnpj', {
-                onChange: (el) => handleChangeFormatCNPJInput(el.target.value),
+                onChange: (el) => (el.target.value = maskCNPJ(el.target.value)),
               })}
               error={!!errors.cnpj?.message}
             />
+            <Input.Message message={errors.cnpj?.message} />
           </Input.Label>
           <Input.Label name="Email">
             <Input.Field
@@ -51,6 +58,7 @@ export default function RegisterPage() {
               {...register('email')}
               error={!!errors.email?.message}
             />
+            <Input.Message message={errors.email?.message} />
           </Input.Label>
           <Input.Label name="Senha">
             <Input.Field
@@ -59,8 +67,11 @@ export default function RegisterPage() {
               {...register('password')}
               error={!!errors.password?.message}
             />
+            <Input.Message message={errors.password?.message} />
           </Input.Label>
-          <Button>Cadastra-se</Button>
+          <Button isLoading={isPending} disable={!isValid || isPending}>
+            Cadastra-se
+          </Button>
         </form>
 
         <span className="mt-10 pb-10 block w-full text-center text-gray-500 font-medium">

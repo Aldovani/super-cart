@@ -52,14 +52,14 @@ export function ProductsTable() {
               <span className="font-medium text-gray-600">12/04/2024</span>
             </td>
             <td className="py-6">
-              <DropDownMenu.Context>
+              <DropDownMenu>
                 <DropDownMenu.Trigger>
                   <Ellipsis />
                 </DropDownMenu.Trigger>
                 <DropDownMenu.Body>
                   <p>sds</p>
                 </DropDownMenu.Body>
-              </DropDownMenu.Context>
+              </DropDownMenu>
             </td>
           </tr>
 

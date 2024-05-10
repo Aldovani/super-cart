@@ -15,8 +15,10 @@ export default function PaymentMethodsListPage() {
           </div>
         </div>
       </header>
-      <section className="px-8 mt-8  ">
-        <h3 className="text-xl font-medium text-gray-600">Pagamento no site</h3>
+      <section className="px-8 mt-8 ">
+        <h3 className="text-xl mb-6 font-medium text-gray-600">
+          Pagamento no site
+        </h3>
         <div className="grid grid-cols-3 gap-4   max-w-[720px] ">
           <div>
             <input
@@ -98,8 +100,10 @@ export default function PaymentMethodsListPage() {
 
       <div className="w-[calc(100%_-_64px)] h-[1px] bg-gray-200 ml-8 my-10 "></div>
 
-      <section className="px-8 mt-8 ">
-        <h3 className="text-xl font-medium text-gray-600">Pagamento no site</h3>
+      <section className="px-8 mt-8 pb-8 ">
+        <h3 className="text-xl mb-6 font-medium text-gray-600">
+          Pagamento no site
+        </h3>
 
         <div className="grid grid-cols-3 gap-4 max-w-[720px]">
           <div>

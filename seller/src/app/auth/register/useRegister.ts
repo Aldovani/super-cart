@@ -1,8 +1,11 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { CreateSeller } from '@/api/seller/create'
+import { HttpError } from '@/errors/HttpError'
+import { useForms } from '@/hooks/useForms'
+import { SellerGateway } from '@/services/Seller'
 import { validateCNPJ } from '@/utils/isValidCNPJ'
 import { maskCNPJ } from '@/utils/maskCnpj'
 
@@ -30,35 +33,49 @@ type onSubmitPayload = {
   password: string
 }
 
-export function useRegister() {
+type UseRegisterProps = {
+  sellerGateway: SellerGateway
+}
+
+export function useRegister({ sellerGateway }: UseRegisterProps) {
   const {
-    register,
     handleSubmit,
-    formState: { errors },
+    register,
     reset,
-    setValue,
-  } = useForm<registerSchema>({
-    resolver: zodResolver(registerSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    setError,
+    formState: { errors, isValid },
+  } = useForms<registerSchema>({
+    validator: registerSchema,
   })
 
-  function handleChangeFormatCNPJInput(value: string) {
-    setValue('cnpj', maskCNPJ(value))
-  }
+  const router = useRouter()
+  const { mutate: onSubmit, isPending } = useMutation({
+    mutationFn: async ({ cnpj, email, password }: onSubmitPayload) => {
+      const data = await sellerGateway.create({ cnpj, email, password })
+      return data
+    },
+    onSuccess: () => {
+      toast.success('cadastrado realizado com sucesso')
+      router.push('/auth/signin')
+      reset()
+    },
+    onError: (err: HttpError) => {
+      if (err.code === 'ALREADY_EXISTS') {
+        setError('cnpj', { message: 'CNPJ já cadastrado' })
+        return
+      }
 
-  async function onSubmit({ cnpj, email, password }: onSubmitPayload) {
-    const data = await CreateSeller({ cnpj, email, password })
-
-    if (!data) return
-    reset()
-  }
+      toast.error('Erro no servidor')
+    },
+  })
 
   return {
+    isPending,
+    isValid,
     register,
     handleSubmit,
     errors,
-    handleChangeFormatCNPJInput,
     onSubmit,
+    maskCNPJ,
   }
 }

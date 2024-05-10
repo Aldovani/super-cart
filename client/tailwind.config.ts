@@ -1,18 +1,19 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "auth-layout":" linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%),url('/auth_layout.png')"
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'auth-layout':
+          " linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%),url('/auth_layout.png')",
       },
       gridTemplateAreas: {
         'form-sing-in': [
@@ -20,17 +21,17 @@ const config: Config = {
           'CPF CPF',
           'email phone',
           'password password',
-          'button button'
+          'button button',
         ],
       },
       gridTemplateColumns: {
-        'layout': '1fr 1fr',
+        layout: '1fr 1fr',
       },
-      
+      maxWidth: {
+        '80%': '80%',
+      },
     },
   },
-  plugins: [
-    require('@savvywombat/tailwindcss-grid-areas')
-  ]
-};
-export default config;
+  plugins: [require('@savvywombat/tailwindcss-grid-areas')],
+}
+export default config

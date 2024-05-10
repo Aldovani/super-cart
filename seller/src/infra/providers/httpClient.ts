@@ -1,26 +1,30 @@
-export type RequestBody = undefined | object
-export interface RequestConfig {
-  body?: RequestBody
-  headers?: Headers
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  path: string
-}
+import { HttpError as HttpErrorClass } from '@/errors/HttpError'
+import {
+  HttpResponse,
+  RequestBody,
+  RequestConfig,
+  RequestConfigMethod,
+} from '@/types/http'
 
-export type RequestConfigMethod = Omit<RequestConfig, 'path' | 'method'>
-
-export interface HttpClient {
+export interface HTTPClient {
   baseUrl: string
-  request<T>(params: RequestConfig): Promise<T>
-  get<T>(path: string, config?: RequestConfigMethod): Promise<T>
+  request<T>(params: RequestConfig): Promise<HttpResponse<T>>
+  get<T>(
+    path: string,
+    config?: RequestConfigMethod,
+  ): Promise<HttpResponse<T> | HttpErrorClass>
   put<T>(
     path: string,
     body: RequestBody,
     config?: Omit<RequestConfigMethod, 'body'>,
-  ): Promise<T>
+  ): Promise<HttpResponse<T>>
   post<T>(
     path: string,
     body: RequestBody,
     config?: Omit<RequestConfigMethod, 'body'>,
-  ): Promise<T>
-  delete<T>(path: string, config?: RequestConfigMethod): Promise<T>
+  ): Promise<HttpResponse<T>>
+  delete<T>(
+    path: string,
+    config?: RequestConfigMethod,
+  ): Promise<HttpResponse<T>>
 }

@@ -1,7 +1,9 @@
 import NextAuth, { AuthOptions } from 'next-auth'
 import CredentialProvider from 'next-auth/providers/credentials'
 
-import { SellerAuthenticate } from '@/api/seller/authenticate'
+import { fetchHttpClient } from '@/infra/providers/impls/httpClient/fetchHttpClient'
+import { SellerAuth } from '@/services'
+const sellerAuth = new SellerAuth(fetchHttpClient)
 
 export const authOption: AuthOptions = {
   providers: [
@@ -13,20 +15,26 @@ export const authOption: AuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.password || !credentials?.cnpj) return null
-        const data = await SellerAuthenticate({
-          cnpj: credentials.cnpj,
-          password: credentials.password,
-        })
+        try {
+          if (!credentials?.password || !credentials?.cnpj) return null
 
-        if (data)
+          const response = await sellerAuth.sign({
+            cnpj: credentials.cnpj,
+            password: credentials.password,
+          })
+
+          const { comerciante, token } = response.data
           return {
-            id: data.comerciante.idComerciante.toString(),
-            accessToken: data.token.token,
-            expiresAt: data.token.expiresAt,
+            email: comerciante.email,
+            image: comerciante.razaoSocial,
+            name: comerciante.logoUrl,
+            id: comerciante.idComerciante.toString(),
+            accessToken: token.token,
+            expiresAt: token.expiresAt,
           }
-
-        return null
+        } catch (err) {
+          return null
+        }
       },
     }),
   ],
@@ -42,7 +50,6 @@ export const authOption: AuthOptions = {
     async session({ session, token }) {
       session.user = token
       session.expires = token.expiresAt
-      console.log({ session })
       return session
     },
   },

@@ -10,7 +10,7 @@ export function ProductsFilter() {
     <header>
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
-          <DropDownMenu.Context>
+          <DropDownMenu>
             <DropDownMenu.Trigger className="flex gap-2 items-center text-sm text-gray-400 font-medium leading-6 px-6 py-2 border border-gray-200 rounded-lg">
               <ShoppingBasket />
               <span>Todos</span>
@@ -18,9 +18,9 @@ export function ProductsFilter() {
             <DropDownMenu.Body>
               <form className="flex flex-col p-2"></form>
             </DropDownMenu.Body>
-          </DropDownMenu.Context>
+          </DropDownMenu>
 
-          <DropDownMenu.Context>
+          <DropDownMenu>
             <DropDownMenu.Trigger className="flex gap-2 items-center text-sm text-gray-400 font-medium leading-6 px-6 py-2 border border-gray-200 rounded-lg">
               <Banknote />
               <span>Valor</span>
@@ -28,9 +28,9 @@ export function ProductsFilter() {
             <DropDownMenu.Body>
               <form className="flex flex-col p-2"></form>
             </DropDownMenu.Body>
-          </DropDownMenu.Context>
+          </DropDownMenu>
 
-          <DropDownMenu.Context>
+          <DropDownMenu>
             <DropDownMenu.Trigger className="flex gap-2 items-center text-sm text-gray-400 font-medium leading-6 px-6 py-2 border border-gray-200 rounded-lg">
               <Layers3 />
               <span>Categorias</span>
@@ -45,9 +45,9 @@ export function ProductsFilter() {
                 <Checkbox htmlFor="unavailable" label="Indisponivel" />
               </form>
             </DropDownMenu.Body>
-          </DropDownMenu.Context>
+          </DropDownMenu>
 
-          <DropDownMenu.Context>
+          <DropDownMenu>
             <DropDownMenu.Trigger className="flex gap-2 items-center text-sm text-gray-400 font-medium leading-6 px-6 py-2 border border-gray-200 rounded-lg">
               <BarChart2 />
               <span>Status</span>
@@ -59,7 +59,7 @@ export function ProductsFilter() {
                 <Checkbox htmlFor="unavailable" label="Indisponivel" />
               </form>
             </DropDownMenu.Body>
-          </DropDownMenu.Context>
+          </DropDownMenu>
         </div>
         <div>
           <Input.Field sizes="small" placeholder="Buscar produto" />

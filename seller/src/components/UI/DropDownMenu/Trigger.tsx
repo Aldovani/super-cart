@@ -11,8 +11,8 @@ export function Trigger({ children, className }: TriggerProps) {
   const { handleToggle } = useDropDown()
 
   return (
-    <button className={`cursor-pointer ${className}`} onClick={handleToggle}>
+    <div className={`cursor-pointer ${className}`} onClick={handleToggle}>
       {children}
-    </button>
+    </div>
   )
 }

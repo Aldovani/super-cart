@@ -6,7 +6,7 @@ const label = tv({
 })
 
 type LabelProps = ComponentProps<'label'> & {
-  children: React.ReactElement
+  children: React.ReactNode
   name: string
   description?: string
   isRequired?: boolean

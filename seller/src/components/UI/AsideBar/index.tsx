@@ -9,11 +9,17 @@ import {
   Cog,
   CreditCard,
   LayoutDashboard,
+  LogOut,
   ReceiptText,
   ScanBarcode,
   ShoppingBasket,
+  UserPlus,
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { signOut } from 'next-auth/react'
+
+import { Button } from '../Button'
+import { DropDownMenu } from '../DropDownMenu'
 
 import { LinkItem } from './LinkItem'
 
@@ -26,16 +32,56 @@ export function AsideBar() {
         <div className="pl-4 pr-5">
           <h2 className="text-emerald-600 font-bold text-xl">Super Cart</h2>
 
-          <div className="mt-6 mb-8  border flex justify-between items-center border-gray-200 px-2 py-2 rounded-lg">
-            <div className="size-10 bg-gray-200 rounded-xl "></div>
-            <div className="flex flex-col gap-1">
-              <h4 className="text-gray-600 text-sm font-medium leading-[100%]">
-                Mercado Geni
-              </h4>
-              <span className="text-xs text-gray-400">Mercado</span>
-            </div>
-            <ChevronDown className="text-gray-500" />
-          </div>
+          <DropDownMenu>
+            <DropDownMenu.Trigger>
+              <div className="mt-6 mb-8  border flex justify-between items-center border-gray-200 px-2 py-2 rounded-lg">
+                <div className="size-10 bg-gray-200 rounded-xl "></div>
+                <div className="flex flex-col gap-1">
+                  <h4 className="text-gray-600 text-sm font-medium leading-[100%]">
+                    Mercado Geni
+                  </h4>
+                  <span className="text-xs text-gray-400">Mercado</span>
+                </div>
+                <ChevronDown className="text-gray-500" />
+              </div>
+            </DropDownMenu.Trigger>
+            <DropDownMenu.Body className="w-full p-3">
+              <div>
+                <div>
+                  <span className="text-gray-400 text-sm">contas</span>
+                  <div className="flex gap-3 mt-2 cursor-pointer hover:bg-gray-100 rounded-xl bg-white p-2">
+                    <div className="size-10 bg-gray-200 rounded-xl "></div>
+                    <div className="flex flex-col gap-1">
+                      <h4 className="text-gray-600 text-sm font-medium leading-[100%]">
+                        Mercado Geni
+                      </h4>
+                      <span className="text-xs text-gray-400">Mercado</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full h-[1px] bg-gray-200 my-3"></div>
+                <div>
+                  <Button
+                    className="pl-2 gap-3 justify-start text-gray-400"
+                    sizes="sm"
+                    variants="ghost"
+                  >
+                    <UserPlus size={24} />
+                    Gerenciar contas
+                  </Button>
+                  <Button
+                    className="pl-2 justify-start gap-3 text-gray-400 hover:text-rose-600 hover:bg-rose-50"
+                    sizes="sm"
+                    variants="ghost"
+                    onClick={() => signOut({})}
+                  >
+                    <LogOut size={24} />
+                    Deslogar
+                  </Button>
+                </div>
+              </div>
+            </DropDownMenu.Body>
+          </DropDownMenu>
 
           <LinkItem
             isActive={pathName.includes('/app/dashboard')}

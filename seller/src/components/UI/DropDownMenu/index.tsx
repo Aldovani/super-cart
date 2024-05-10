@@ -3,9 +3,14 @@ import { Container } from './container'
 import { ContextProvider } from './Context'
 import { Trigger } from './Trigger'
 
-export const DropDownMenu = {
-  Container,
-  Body,
-  Trigger,
-  Context: ContextProvider,
+type DropDownMenuProps = {
+  children: React.ReactNode
 }
+
+export function DropDownMenu({ children }: DropDownMenuProps) {
+  return <ContextProvider>{children}</ContextProvider>
+}
+
+DropDownMenu.Body = Body
+DropDownMenu.Container = Container
+DropDownMenu.Trigger = Trigger
