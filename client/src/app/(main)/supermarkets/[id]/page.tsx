@@ -1,3 +1,8 @@
+import { Input } from '@/components/UI/Input'
+import { Select } from '@/components/UI/Input/Select'
+import { ProductsFilter } from '@/components/UI/ProductsFilter'
+import { ProductsList } from '@/components/UI/ProductsList'
+import { ProductsSection } from '@/components/UI/ProductsSection'
 import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -33,22 +38,50 @@ export default function SupermarketsDetailsPage() {
             <h1 className="text-[2.5rem] font-semibold text-gray-800 mt-4">
               Supermercado Bela vista
             </h1>
-            <span>Select</span>
-            <span>Entrega ao mínimo de R$50.00</span>
-            <span>ver mais</span>
+
+            <Select className="mt-4">
+              <option value="">
+                Entrega • Sexta - 09:00 - 11:00 • R$ 9,50
+              </option>
+              <option value="">
+                Entrega • Sexta - 09:00 - 11:00 • R$ 9,50
+              </option>
+              <option value="">
+                Entrega • Sexta - 09:00 - 11:00 • R$ 9,50
+              </option>
+            </Select>
+            <span className="mt-4 block text-gray-500">
+              Entrega ao mínimo de R$50.00
+            </span>
+            <span className="mt-3 block text-emerald-600 ">ver mais</span>
           </div>
           <div className="flex flex-col items-end">
             <div className="flex  px-4 py-3 rounded-lg  bg-yellow-100 items-center gap-1">
               <Star className="text-yellow-500 fill-yellow-500" />
               <h3 className="text-2xl font-bold text-yellow-500">4.3</h3>
             </div>
-            <strong className="text-xl text-gray-900">Excelente</strong>
-            <span className="text-gray-400 text-sm">(2000 avaliações)</span>
-            <Link href="" className="text-emerald-600">
+            <strong className="text-xl font-semibold mt-3 text-gray-900">
+              Excelente
+            </strong>
+            <span className="text-gray-400 text-sm mt-1">
+              (2000 avaliações)
+            </span>
+            <Link href="" className="text-emerald-600 mt-2">
               Ver todas avaliações
             </Link>
           </div>
         </header>
+
+        <main className="mt-10 flex gap-20">
+          <aside>
+            <ProductsFilter />
+          </aside>
+          <div className="w-full">
+            <Input.Field placeholder="Busque por item " />
+
+            <ProductsSection sectionName="Em Promoção" category="promotion" />
+          </div>
+        </main>
       </div>
     </>
   )
