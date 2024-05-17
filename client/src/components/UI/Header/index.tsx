@@ -1,6 +1,7 @@
 import { LogIn, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 
+import { Cart } from '../Cart'
 import { Input } from '../Input'
 import { Logo } from '../Logo'
 
@@ -22,9 +23,11 @@ export function Header() {
             Entra/Cadastra-se
           </Link>
 
-          <button className="p-3 hover:bg-gray-100 bg-white rounded-lg ">
-            <ShoppingCart size={24} className="text-emerald-600" />
-          </button>
+          <Cart>
+            <div className="p-3 hover:bg-gray-100 bg-white rounded-lg ">
+              <ShoppingCart size={24} className="text-emerald-600" />
+            </div>
+          </Cart>
         </div>
       </div>
     </header>

@@ -49,8 +49,7 @@ export function useSignIn() {
       }
     },
     onSuccess: () => {
-      const callbackUrl =
-        searchParams.get('callbackUrl') || 'http://localhost:3000/app/dashboard'
+      const callbackUrl = searchParams.get('callbackUrl') || 'app/dashboard'
       navigation.push(callbackUrl)
     },
     onError: (err) => {

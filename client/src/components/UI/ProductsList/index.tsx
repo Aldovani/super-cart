@@ -5,23 +5,19 @@ export type product = {
   id: string
   price: string
   image: string
-  descruiption: string
+  description: string
 }
 
-type ProductsListProps = {}
-
-export function ProductsList({}: ProductsListProps) {
-  /*
-
-    TODO:CHAMA  A API
-
-    */
-
+export function ProductsList() {
   return (
-    <ul>
-      {/* {products.map((product) => ( */}
+    <ul className="grid grid-flow-col overflow-x-scroll  justify-between gap-3 ">
       <ProductsListItem />
-      {/* ))} */}
+      <ProductsListItem />
+      <ProductsListItem />
+      <ProductsListItem />
+      <ProductsListItem />
+      <ProductsListItem />
+      <ProductsListItem />
     </ul>
   )
 }

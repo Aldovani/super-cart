@@ -24,6 +24,7 @@ export const authOption: AuthOptions = {
           })
 
           const { comerciante, token } = response.data
+
           return {
             email: comerciante.email,
             image: comerciante.razaoSocial,

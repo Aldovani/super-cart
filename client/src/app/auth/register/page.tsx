@@ -8,8 +8,11 @@ import { Button } from '@/components/UI/Button'
 import { Input } from '@/components/UI/Input'
 import { Logo } from '@/components/UI/Logo'
 import { Password } from '@/components/UI/Password'
+import { fetchHttpClient } from '@/infra/providers/impls/httpClient/fetchHttpClient'
+import { UserGateway } from '@/services/impls/User'
 
 import { useRegister } from './useRegister'
+const userGateway = new UserGateway(fetchHttpClient)
 
 export default function RegisterPage() {
   const {
@@ -19,7 +22,8 @@ export default function RegisterPage() {
     watch,
     handleChangeCPF,
     handleChangeCellphone,
-  } = useRegister()
+    handleCreateUser,
+  } = useRegister({ userGateway })
   return (
     <>
       <header className="mt-6 flex justify-between">
@@ -40,7 +44,7 @@ export default function RegisterPage() {
         </div>
         <form
           onSubmit={handleSubmit((user) => {
-            console.log({ ...user })
+            handleCreateUser(user)
           })}
           className="mt-10 grid grid-areas-form-sing-in gap-y-4 gap-x-6 max-sm:grid-areas-none max-sm:grid-cols-1 "
         >
@@ -98,7 +102,7 @@ export default function RegisterPage() {
               value={watch('password')}
             />
           </Input.Label>
-          <Button className="grid-in-button max-sm:grid-in-unset">
+          <Button type="submit" className="grid-in-button max-sm:grid-in-unset">
             Cadastra-se
           </Button>
         </form>

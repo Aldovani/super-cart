@@ -1,11 +1,12 @@
-import { Input } from '@/components/UI/Input'
-import { Select } from '@/components/UI/Input/Select'
-import { ProductsFilter } from '@/components/UI/ProductsFilter'
-import { ProductsList } from '@/components/UI/ProductsList'
-import { ProductsSection } from '@/components/UI/ProductsSection'
 import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { Input } from '@/components/UI/Input'
+import { Select } from '@/components/UI/Input/Select'
+import { ProductDetail } from '@/components/UI/ProductDetail'
+import { ProductsFilter } from '@/components/UI/ProductsFilter'
+import { ProductsSection } from '@/components/UI/ProductsSection'
 
 export default function SupermarketsDetailsPage() {
   return (
@@ -76,10 +77,36 @@ export default function SupermarketsDetailsPage() {
           <aside>
             <ProductsFilter />
           </aside>
-          <div className="w-full">
+          <div className="w-full  overflow-x-clip">
             <Input.Field placeholder="Busque por item " />
 
-            <ProductsSection sectionName="Em Promoção" category="promotion" />
+            <ProductDetail />
+
+            <ProductsSection
+              className="mt-12"
+              sectionName="Em Promoção"
+              category="promotion"
+            />
+            <ProductsSection
+              className="mt-12"
+              sectionName="Todos os produtos"
+              category="all"
+            />
+            <ProductsSection
+              className="mt-12"
+              sectionName="Frios"
+              category="promotion"
+            />
+            <ProductsSection
+              className="mt-12"
+              sectionName="Em Promoção"
+              category="promotion"
+            />
+            <ProductsSection
+              className="mt-12"
+              sectionName="Em Promoção"
+              category="promotion"
+            />
           </div>
         </main>
       </div>
