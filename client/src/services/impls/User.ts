@@ -21,7 +21,6 @@ export class UserGateway implements IUserGateway {
         },
       ],
     }
-    console.log({ http: this.HTTPClient })
     const response = await this.HTTPClient.post<CreatePayloadResponse>(
       '/usuarios',
       user,

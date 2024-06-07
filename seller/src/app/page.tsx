@@ -1,3 +1,5 @@
-export default function Home() {
-  return <div>home</div>
+import { redirect } from 'next/navigation'
+
+export default async function HomePage() {
+  redirect(`/auth/signin`)
 }

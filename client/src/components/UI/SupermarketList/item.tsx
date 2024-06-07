@@ -5,7 +5,7 @@ export function SupermarketItem() {
   return (
     <li>
       <Link
-        href="/supermarkets/587"
+        href="/supermarket/587"
         className="flex gap-5 items-center border border-gray-200 rounded-xl  px-4 py-3 bg-white transition-colors hover:bg-gray-50"
       >
         <div className="size-20 bg-gray-200 rounded-lg"></div>

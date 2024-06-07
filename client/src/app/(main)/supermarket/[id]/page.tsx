@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import { Input } from '@/components/UI/Input'
 import { Select } from '@/components/UI/Input/Select'
-import { ProductDetail } from '@/components/UI/ProductDetail'
 import { ProductsFilter } from '@/components/UI/ProductsFilter'
 import { ProductsSection } from '@/components/UI/ProductsSection'
 
@@ -73,14 +72,14 @@ export default function SupermarketsDetailsPage() {
           </div>
         </header>
 
-        <main className="mt-10 flex gap-20">
+        <main className="mt-10 flex gap-20 ">
           <aside>
             <ProductsFilter />
           </aside>
-          <div className="w-full  overflow-x-clip">
+          <div className="w-full px-4  overflow-x-clip">
             <Input.Field placeholder="Busque por item " />
 
-            <ProductDetail />
+            {/* <ProductDetail /> */}
 
             <ProductsSection
               className="mt-12"
