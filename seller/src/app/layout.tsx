@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import { getServerSession } from 'next-auth'
-import { Toaster } from 'sonner'
 
+import { Toaster } from '@/components/ui/sonner'
 import { Providers } from '@/providers'
 
 import './globals.css'
@@ -22,11 +21,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await getServerSession()
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Providers session={session}>{children}</Providers>
+        <Providers>{children}</Providers>
         <Toaster richColors />
       </body>
     </html>
